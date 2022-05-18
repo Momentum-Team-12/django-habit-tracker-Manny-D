@@ -1,0 +1,12 @@
+from django import forms
+from django.contrib.auth.models import AbstractUser
+
+# class CreateUserForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields = [
+#             'username',
+#             'email',
+#             'password1',
+#             'password2',
+#         ]
