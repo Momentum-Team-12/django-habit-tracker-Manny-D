@@ -11,7 +11,7 @@ class User(AbstractUser):
 
 class Habit(models.Model):
 	name = models.CharField(max_length=200, null=True, blank=True)
-	goal = models.IntegerField
+	goal = models.IntegerField(default=0)
 	unit = models.CharField(max_length=100)
 	created_at = models.DateField(auto_now_add=True)
 	user = models.ForeignKey('User', null=True, blank=True,on_delete=models.CASCADE, related_name='habits')
@@ -20,7 +20,9 @@ class Habit(models.Model):
 	    return self.name
 
 class Record(models.Model):
-	date = models.DateField(auto_now_add=datetime.now)
+	created_at = models.DateField(auto_now_add=True)
+	date = models.DateField()
+	record = models.IntegerField(default=0)
 	habit = models.ForeignKey('Habit', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_record')
 	user = models.ForeignKey('User', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_user_record')
 	
