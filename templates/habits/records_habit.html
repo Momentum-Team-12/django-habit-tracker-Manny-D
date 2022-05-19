@@ -14,7 +14,7 @@
                 <p><b><u>Daily entries for {{ habit.unit }}</u>:</b>
                 {% for habit in habit.habit_records.all %}
                     <div class="flex">
-                        <div>{{ habit.record }} on {{ habit.created_at }}</div>
+                        <div>{{ habit.record }} on {{ habit.date }}</div>
                     </div>
                 {% endfor %}
                 </p>

@@ -11,17 +11,23 @@ def log_in(request):
 
 @login_required
 def list_habits(request):
-    habits = Habit.objects.all()
+    habits = Habit.objects.filter(user=request.user)
     return render(request, "habits/list_habits.html", {"habits": habits})
 
 @login_required
 def habit_detail(request,pk):
-    # form = FavoriteForm()
-    habit = Habit.objects.get(pk=pk)
-    context = {
-        'habit':habit,
-        # 'form':form,
+    habit = Habit.objects.filter(habit=habit)
+    if request.method == 'GET':
+        form = RecordForm()
+    else:
+        form = RecordForm(data=request.POST)
+        if form.is_valid():
+            context = {
+                'habit':habit,
+                # 'daterecords':daterecords,
+                'form':form,
     }
+
     return render(request, 'habits/habit_detail.html', context)    
 
 @login_required
@@ -31,7 +37,9 @@ def new_habit(request):
     else:
         form = HabitForm(data=request.POST)
         if form.is_valid():
-            form.save()
+            habit = form.save(commit=False)
+            habit.user = request.user
+            habit.save()
             return redirect(to='list_habits')
 
     return render(request, "habits/new_habit.html", {"form": form})
@@ -101,6 +109,17 @@ def edit_record(request, pk):
         "form": form,
         "record": record
     })   
+
+@login_required
+def delete_record(request, pk):
+    habit = get_object_or_404(Habit)
+    record = get_object_or_404(Record, pk=pk)
+    # user = get_object_or_404(User)
+    if request.method == "POST":
+        record.delete()
+        return redirect(to="habit_detail")
+
+    return render(request, "delete_record.html", {"record": record, "habit": habit})    
 
 # def category_habit(request, slug):
 #     category = Category.objects.get(slug=slug)

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Delete Habit</h1>
+
+<div>
+  <form action="{% url 'delete_record' pk=record.pk %}" method="POST">
+    {% csrf_token %}
+    <p>Are you sure you want to delete {{ record.name }}?</p>
+    <div>
+    <br>
+      <button type="submit">Delete Record</button><br />
+      <br>
+      <a href="{% url 'list_habits' %}">Cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
