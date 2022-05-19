@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from calendar import HTMLCalendar
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
@@ -21,14 +22,14 @@ class Habit(models.Model):
 
 class Record(models.Model):
 	created_at = models.DateField(auto_now_add=True)
-	date = models.DateField()
+	date = models.DateField(default=datetime.now)
 	record = models.IntegerField(default=0)
-	habit = models.ForeignKey('Habit', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_record')
-	user = models.ForeignKey('User', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_user_record')
+	habit = models.ForeignKey('Habit', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_records')
+	user = models.ForeignKey('User', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_records')
 	
 	class Meta:
 		constraints = [
-			models.UniqueConstraint(fields=['date','habit'], name='daily')
+			models.UniqueConstraint(fields=['date','habit'], name='daily_record')
 		]
 
 	def __str__(self):

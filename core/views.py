@@ -68,7 +68,7 @@ def add_record(request, pk):
         form = RecordForm()
     else:
         form = RecordForm(data=request.POST)
-        if form.recordlid():
+        if form.is_valid():
             new_record = form.save(commit=False)
             new_record.habit = habit
             new_record.save()

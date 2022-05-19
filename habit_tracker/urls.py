@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 from django import views
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
@@ -32,3 +33,10 @@ urlpatterns = [
     path('habits/<int:pk>/delete/', habits_views.delete_habit, name='delete_habit'),
     path('habits/<int:pk>/add_record/', habits_views.add_record, name='add_record'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ]

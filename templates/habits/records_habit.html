@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="w-33 pa3">
+    <a href="{% url 'list_habits' %}">Back to Habit List</a>
+        <h2>{{ habit.name }}</h2>
+            <div class="flex">
+            <div class="pr2">
+            <div>
+                {% load static %}
+
+
+                <h3>Habit: {{ habit.name }}</h3>
+                <p>Goal: {{ habit.goal }}</p>
+
+                <p>| added {{ habit.created_at }} |</p>
+            </div>
+                <p>
+                {% for habit in habit.records.all %}
+                    <div class="flex">
+                        <div>{{ habit.record }}</div>
+                    </div>
+                {% endfor %}
+                </p>
+
+                <p>
+                    <a href="{% url 'add_record' pk=habit.pk %}">Add Record</a> | 
+                    <a href="{% url 'edit_habit' pk=habit.pk %}">Edit Habit</a> |    
+                    <a class="red" href="{% url 'delete_habit' pk=habit.pk %}">Delete Habit</a>
+                <br>
+                </p>
+        
+                
+            </div>  
+            </div>   
+            </div>
+</div>  
+{% endblock %}

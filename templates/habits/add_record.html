@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Add a Record for {{ habit.name }}:</h2>
+
+<div class="flex flex-wrap">
+    {% for habit in habits %}
+        <div>{{ habit.record }}</div>
+</div>
+    {% endfor %}
+
+<div>
+    <form action="{% url 'add_record' pk=habit.pk %}" method="POST">
+    {% csrf_token %} 
+    {{ form.as_p }} 
+    {% for habit in habit.records.all %}
+        <div class="flex">
+            <!-- <div>Date:<input class="input" type="date" value="{% now 'm/d/Y' %}"></div> -->
+            <div>{{ habit.record }}</div>
+        </div>
+    {% endfor %}
+ <br>
+        <div>
+            <button type="submit">Add Record</button><br>
+            <br>
+            <a href="{% url 'list_habits' %}">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

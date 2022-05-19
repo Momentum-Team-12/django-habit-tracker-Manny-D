@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<br>
+<h1>Recently Added Habits</h1>
+<div class="flex flex-wrap">
+    {% for habit in habits %}
+    <div class="w-33 pa3">
+        <h2>Habit: <a href="{% url 'records_habit' pk=habit.pk %}">{{ habit.name }}</h2></a> 
+        <h2>Target/Goal: {{ habit.goal }}</h2>
+        <h2>Unit: {{ habit.unit }}</h2>
+        <p>{{ habit.record }}</p>
+
+                        <a href="{% url 'add_record' pk=habit.pk %}">Add Record</a> |  
+                        <a href="{% url 'edit_habit' pk=habit.pk %}">Edit Habit</a> |     
+                        <a class="red" href="{% url 'delete_habit' pk=habit.pk %}">Delete Habit</a>
+                    </p>
+    </div>
+    <hr>
+    {% endfor %}
+</div>  
+{% endblock %}
