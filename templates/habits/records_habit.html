@@ -10,14 +10,14 @@
 
 
                 <h3>Habit: {{ habit.name }}</h3>
-                <p>Goal: {{ habit.goal }}</p>
+                <h3>Goal: {{ habit.goal }}</h3>
 
-                <p>| added {{ habit.created_at }} |</p>
+                <p>Added {{ habit.created_at }}</p>
             </div>
                 <p>
-                {% for habit in habit.records.all %}
+                {% for habit in habit.habit_records.all %}
                     <div class="flex">
-                        <div>{{ habit.record }}</div>
+                        <div>{{ record.created_at }}{{ habit.record }}</div>
                     </div>
                 {% endfor %}
                 </p>

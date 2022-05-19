@@ -1,17 +1,20 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from .models import Habit, Record
-from .forms import HabitForm
-from .forms import RecordForm
+from .forms import HabitForm, RecordForm
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url="auth_login")
 def home(request):
 	if request.user.is_authenticated:
 		return redirect('list_habits')
 	return render(request, "base.html")
 
+@login_required
 def list_habits(request):
     habits = Habit.objects.all()
     return render(request, "habits/list_habits.html", {"habits": habits})
 
+@login_required
 def habit_detail(request,pk):
     # form = FavoriteForm()
     habit = Habit.objects.get(pk=pk)
@@ -21,6 +24,7 @@ def habit_detail(request,pk):
     }
     return render(request, 'habits/habit_detail.html', context)    
 
+@login_required
 def new_habit(request):
     if request.method == 'GET':
         form = HabitForm()
@@ -32,6 +36,7 @@ def new_habit(request):
 
     return render(request, "habits/new_habit.html", {"form": form})
 
+@login_required
 def edit_habit(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     if request.method == 'GET':
@@ -47,7 +52,7 @@ def edit_habit(request, pk):
         "habit": habit
     })
 
-
+@login_required
 def delete_habit(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     if request.method == 'POST':
@@ -56,12 +61,13 @@ def delete_habit(request, pk):
 
     return render(request, "habits/delete_habit.html", {"habit": habit})
 
-
+@login_required
 def records_habit(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
 
     return render(request, "habits/records_habit.html", {"habit": habit})
 
+@login_required
 def add_record(request, pk):
     habit = get_object_or_404(Habit, pk=pk)
     if request.method == 'GET':
@@ -78,6 +84,23 @@ def add_record(request, pk):
         "form": form,
         "habit": habit
     })
+
+@login_required
+def edit_record(request, pk):
+    habit = get_object_or_404(Habit, pk=pk)
+    record = get_object_or_404(Record, pk=pk)
+    if request.method == 'GET':
+        form = RecordForm(instance=record)
+    else:
+        form = RecordForm(data=request.POST, instance=record)
+        if form.is_valid():
+            form.save()
+            return redirect(to='habits_habits')
+
+    return render(request, "habits/edit_record.html", {
+        "form": form,
+        "record": record
+    })   
 
 # def category_habit(request, slug):
 #     category = Category.objects.get(slug=slug)
