@@ -5,7 +5,7 @@
     {% for habit in habits %}
     <div class="w-33 pa3">
         <p><b>Habit:</b> {{ habit.name }}</p>
-        <p><b>Target/Goal:</b> {{ habit.goal }}</p>
+        <p><b>Daily Goal:</b> {{ habit.goal }}</p>
         <p><b>Unit:</b> {{ habit.unit }}</p>
         
                         <a href="{% url 'records_habit' pk=habit.pk %}">Current Records</a> |

@@ -2,30 +2,25 @@
 {% block content %}
 <div class="w-33 pa3">
     <a href="{% url 'list_habits' %}">Back to Habit List</a>
-        <h2>{{ habit.name }}</h2>
+        <h2>Records for {{ habit.name }}</h2>
+        <p>(habit added: {{ habit.created_at }})</p>
             <div class="flex">
             <div class="pr2">
             <div>
                 {% load static %}
-
-
-                <h3>Habit: {{ habit.name }}</h3>
-                <h3>Goal: {{ habit.goal }}</h3>
-
-                <p>Added {{ habit.created_at }}</p>
+                <h3>Target/Goal: {{ habit.goal }} {{ habit.unit }}</h3>
             </div>
-                <p>
+                <br/>
+                <p><b><u>Daily entries for {{ habit.unit }}</u>:</b>
                 {% for habit in habit.habit_records.all %}
                     <div class="flex">
-                        <div>{{ record.created_at }}{{ habit.record }}</div>
+                        <div>{{ habit.record }} on {{ habit.created_at }}</div>
                     </div>
                 {% endfor %}
                 </p>
-
                 <p>
                     <a href="{% url 'add_record' pk=habit.pk %}">Add Record</a> | 
-                    <a href="{% url 'edit_habit' pk=habit.pk %}">Edit Habit</a> |    
-                    <a class="red" href="{% url 'delete_habit' pk=habit.pk %}">Delete Habit</a>
+                    <a href="{% url 'edit_record' pk=habit.pk %}">Edit Record</a>
                 <br>
                 </p>
         

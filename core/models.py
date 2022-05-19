@@ -21,15 +21,15 @@ class Habit(models.Model):
 	    return self.name
 
 class Record(models.Model):
-	created_at = models.DateField(auto_now_add=True)
-	date = models.DateField(default=datetime.now)
+	created_at = models.DateTimeField(auto_now_add=True)
+	date = models.DateTimeField(default=datetime.now)
 	record = models.IntegerField(default=0)
 	habit = models.ForeignKey('Habit', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_records')
 	user = models.ForeignKey('User', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_records')
 	
 	class Meta:
 		constraints = [
-			models.UniqueConstraint(fields=['date','habit'], name='daily_record')
+			models.UniqueConstraint(fields=['date','habit', 'user'], name='daily_record')
 		]
 
 	def __str__(self):

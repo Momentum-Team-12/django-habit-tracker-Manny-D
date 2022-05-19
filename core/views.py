@@ -4,7 +4,7 @@ from .forms import HabitForm, RecordForm
 from django.contrib.auth.decorators import login_required
 
 @login_required(login_url="auth_login")
-def home(request):
+def log_in(request):
 	if request.user.is_authenticated:
 		return redirect('list_habits')
 	return render(request, "base.html")

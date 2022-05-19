@@ -24,7 +24,7 @@ from core import views as habits_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
-    path('', habits_views.home , name='home'),
+    path('', habits_views.log_in , name='log_in'),
     path('habits/', habits_views.list_habits, name='list_habits'),
     path('habits/<int:pk>',habits_views.habit_detail, name='habit_detail'),
     path('habits/<int:pk>/record/', habits_views.records_habit,name='records_habit'),
