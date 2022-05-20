@@ -8,11 +8,10 @@
         <p><b>Daily Goal:</b> {{ habit.goal }}</p>
         <p><b>Unit:</b> {{ habit.unit }}</p>
         
-                        <a href="{% url 'records_habit' pk=habit.pk %}">Current Records</a> |
-                        <a href="{% url 'add_record' pk=habit.pk %}">Add Record</a> |  
-                        <a href="{% url 'edit_record' pk=habit.pk %}">Edit Record</a> | 
-                        <a href="{% url 'edit_habit' pk=habit.pk %}">Edit Habit</a> |     
-                        <a class="red" href="{% url 'delete_habit' pk=habit.pk %}">Delete Habit</a>
+                        <a href="{% url 'records_habit' habit.pk %}">Current Records</a> |
+                        <a href="{% url 'add_record' habit.pk %}">Add Record</a> |  
+                        <a href="{% url 'edit_habit' habit.pk %}">Edit Habit</a> |     
+                        <a class="red" href="{% url 'delete_habit' habit.pk %}">Delete Habit</a>
                     </p>
     </div>
     <hr>

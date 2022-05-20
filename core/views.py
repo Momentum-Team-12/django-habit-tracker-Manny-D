@@ -99,14 +99,18 @@ def edit_record(request, pk):
     record = get_object_or_404(Record, pk=pk)
     if request.method == 'GET':
         form = RecordForm(instance=record)
-    else:
-        form = RecordForm(data=request.POST, instance=record)
         if form.is_valid():
-            form.save()
-            return redirect(to='habits_habits')
+            record = form.save(commit=False)
+            record.habit = habit
+            record.save()
+            return redirect(to='records_habit', pk=pk)
+
+    else:
+        form = RecordForm(instance=record)
 
     return render(request, "habits/edit_record.html", {
         "form": form,
+        "habit": habit,
         "record": record
     })   
 

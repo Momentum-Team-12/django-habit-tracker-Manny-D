@@ -6,10 +6,10 @@
   <form action="{% url 'edit_habit' pk=habit.pk %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
+    <br>
     <div>
-      <button type="submit">Update Habit</button><br>
-      <br>
-      <a href="{% url 'list_habits' %}">Cancel</a>
+    <button type="submit">Update Habit</button><br>  
+    <button><a href="{% url 'list_habits' %}">Cancel</a></button>
     </div>
   </form>
 </div>

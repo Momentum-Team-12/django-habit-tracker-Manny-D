@@ -18,13 +18,9 @@
                     </div>
                 {% endfor %}
                 </p>
-                <p>
-                    <a href="{% url 'add_record' pk=habit.pk %}">Add Record</a> | 
-                    <a href="{% url 'edit_record' pk=habit.pk %}">Edit Record</a>
-                <br>
-                </p>
-        
-                
+                <br/>
+                    <button><a href="{% url 'add_record' pk=habit.pk %}">Add Record</a></button> 
+                    <button><a href="{% url 'edit_record' pk=habit.pk %}">Edit Record</a></button>
             </div>  
             </div>   
             </div>

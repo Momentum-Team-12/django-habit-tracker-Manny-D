@@ -22,7 +22,7 @@ class Habit(models.Model):
 
 class Record(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
-	date = models.DateField()
+	date = models.DateField(null=True, blank=True)
 	record = models.IntegerField(default=0)
 	habit = models.ForeignKey('Habit', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_records')
 	user = models.ForeignKey('User', null=True, blank=True,on_delete=models.CASCADE, related_name='habit_records')
