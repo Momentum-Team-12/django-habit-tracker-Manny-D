@@ -14,18 +14,18 @@
                <a href="{% url 'add_record' pk=habit.pk %}">Add Record</a>
                 <p><b><u>Daily entries for {{ habit.unit }}</u>:</b></p>
                 <div class="flex">
-                    {% for habit in habit.habit_records.all %}
-                        <div>{{ habit.record }} on {{ habit.date }}</div>
-                            {% if habit.record >= habit.goal %}
+                    {% for record in habit.habit_records.all %}
+                        <div>{{ record.record }} on {{ record.date }}</div>
+                            {% if record.record >= habit.goal %}
                                     <p>Goal achieved. You did it!</p>
-                                        <a href="{% url 'edit_record' pk=habit.pk %}">Edit Record</a> |
-                                        <a href="{% url 'delete_record' pk=habit.pk %}">Delete Record</a>
+                                        <a href="{% url 'edit_record' pk=record.pk %}">Edit Record</a> |
+                                        <a href="{% url 'delete_record' pk=record.pk %}">Delete Record</a>
                                     <br/>
                                     <br/>
                             {% else %}
                                     <p>Goal not reached.</p>
-                                        <a href="{% url 'edit_record' pk=habit.pk %}">Edit Record</a> |
-                                        <a href="{% url 'delete_record' pk=habit.pk %}">Delete Record</a>
+                                        <a href="{% url 'edit_record' pk=record.pk %}">Edit Record</a> |
+                                        <a href="{% url 'delete_record' pk=record.pk %}">Delete Record</a>
                                     <br/>
                                     <br/>
                             {% endif %}

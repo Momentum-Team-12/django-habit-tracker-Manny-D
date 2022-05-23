@@ -7,15 +7,15 @@
     <form action="{% url 'edit_record' pk=record.pk %}" method="POST">
     {% csrf_token %} 
     {{ form.as_p }} 
-    {% for habit in habit.habit_records.all %}
+
         <div class="flex">
             <!-- <div>Date:<input class="input" type="date" value="{% now 'm/d/Y' %}"></div> -->
             <div>{{ habit.habit_records }}</div>
         </div>
-    {% endfor %}
+
  <br>
         <div>
-            <button type="submit">Add Record</button><br>
+            <button type="submit">Update Record</button><br>
             <button><a href="{% url 'list_habits' %}">Cancel</a></button>
         </div>
     </form>

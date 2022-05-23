@@ -95,22 +95,19 @@ def add_record(request, pk):
 
 @login_required
 def edit_record(request, pk):
-    # habit = get_object_or_404(Habit, pk=pk)
     record = get_object_or_404(Record, pk=pk)
-    if request.method == 'GET':
-        form = RecordForm(instance=record)
+    if request.method == 'POST':
+        form = RecordForm(data=request.POST, instance=record)
         if form.is_valid():
             record = form.save(commit=False)
-            # record.habit = habit
             record.save()
-            return redirect(to='habit_detail', pk=pk)
+            return redirect(to='records_habit', pk=pk)
 
     else:
         form = RecordForm(instance=record)
 
     return render(request, "habits/edit_record.html", {
         "form": form,
-        # "habit": habit,
         "record": record
     })   
 
