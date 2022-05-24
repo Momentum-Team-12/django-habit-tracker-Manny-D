@@ -113,36 +113,11 @@ def edit_record(request, pk):
 
 @login_required
 def delete_record(request, pk):
-    # habit = get_object_or_404(Habit)
     record = get_object_or_404(Record, pk=pk)
-    # user = get_object_or_404(User)
     if request.method == "POST":
         record.delete()
-        return redirect(to="habit_detail")
+        return redirect(to="records_habit")
 
     return render(request, "habits/delete_record.html", {
         "record": record, 
-        # "habit": habit
     })    
-
-
-# def category_habit(request, slug):
-#     category = Category.objects.get(slug=slug)
-#     habits = Habit.objects.filter(category=category)
-#     return render(request, "habits/category.html", {'habits':habits, 'category':category})
-
-# def add_favorite(request, pk):
-#     if request.method == 'POST':
-#         habit = get_object_or_404(Habit, pk=pk)
-#         user = request.user
-#         form = FavoriteForm(data=request.POST)
-#         if form.is_valid():
-#             favorite = form.save(commit=False)
-#             favorite.habit = habit
-#             favorite.user = user 
-#             favorite.save()
-#             return redirect(to='habit_detail', pk=pk)
-
-# def favorite_habit(request):
-#     favorites = Favorite.objects.filter(user=request.user)
-#     return render(request, 'habits/favorite_habit.html', {'favorites': favorites})

@@ -5,7 +5,7 @@
 <div>
   <form action="{% url 'delete_record' pk=record.pk %}" method="POST">
     {% csrf_token %}
-    <p>Are you sure you want to delete {{ habit.record }} on {{ habit.date }}?</p>
+    <p>Are you sure you want to delete {{ record.record }} on {{ record.date }}?</p>
     <div>
     <br>
       <button type="submit">Delete Record</button><br />

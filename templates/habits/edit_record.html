@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h2>Edit Record for {{ habit.name }}:</h2>
+<h2>Edit Record for {{ Habit.name }}:</h2>
 
 <div>
     <form action="{% url 'edit_record' pk=record.pk %}" method="POST">
@@ -9,10 +9,8 @@
     {{ form.as_p }} 
 
         <div class="flex">
-            <!-- <div>Date:<input class="input" type="date" value="{% now 'm/d/Y' %}"></div> -->
             <div>{{ habit.habit_records }}</div>
         </div>
-
  <br>
         <div>
             <button type="submit">Update Record</button><br>

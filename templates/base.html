@@ -11,6 +11,7 @@
     <h1>Habit Tracker</h1>
     <div>
         {% if user.is_authenticated %}
+        <p>Welcome back {{ user }}!</p>
         <a href="{% url 'new_habit' %}">Add New Habit</a> | <a href = "{% url 'auth_logout'  %}">Logout</a>
         <hr>
         {% else %}

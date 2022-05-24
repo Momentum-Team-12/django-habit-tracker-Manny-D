@@ -29,7 +29,7 @@ class Record(models.Model):
 	
 	class Meta:
 		constraints = [
-			models.UniqueConstraint(fields=['date','habit', 'user'], name='daily_record')
+			models.UniqueConstraint(fields=['date','habit'], name='daily_record')
 		]
 
 	def __str__(self):

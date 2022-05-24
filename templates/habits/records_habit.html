@@ -21,12 +21,14 @@
                                         <a href="{% url 'edit_record' pk=record.pk %}">Edit Record</a> |
                                         <a href="{% url 'delete_record' pk=record.pk %}">Delete Record</a>
                                     <br/>
+                                    <hr>
                                     <br/>
                             {% else %}
                                     <p>Goal not reached.</p>
                                         <a href="{% url 'edit_record' pk=record.pk %}">Edit Record</a> |
                                         <a href="{% url 'delete_record' pk=record.pk %}">Delete Record</a>
                                     <br/>
+                                    <hr>
                                     <br/>
                             {% endif %}
                             </div>

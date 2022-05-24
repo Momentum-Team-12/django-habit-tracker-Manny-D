@@ -34,6 +34,9 @@ urlpatterns = [
     path('habits/<int:pk>/add_record/', habits_views.add_record, name='add_record'),
     path('habits/record/<int:pk>/edit_record/', habits_views.edit_record, name='edit_record'),
     path('habits/record/<int:pk>/delete_record/', habits_views.delete_record, name='delete_record'),
+
+    path('api-auth/', include ('rest_framework.urls')),
+    path('api/', include ('api.urls')),
 ]
 
 if settings.DEBUG:
