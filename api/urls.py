@@ -5,7 +5,8 @@ from api import views as api_views
 urlpatterns = [
     path('habits', api_views.HabitListView.as_view(), name='api-habits-list'), # working
 
-# these will likely need to change
+    path('habits/create', api_views.HabitCreateView.as_view(), name='api-habit-create'), # testing
+
     path('habits/<int:pk>', api_views.HabitDetail.as_view(), name='api-habit-detail'), # working
     path('users', api_views.UserList.as_view(), name='api-user-list'), # working
     path('user/<int:pk>', api_views.UserDetail.as_view(), name='api-user-detail'), # working -> note user singular
