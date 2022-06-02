@@ -17,7 +17,7 @@ def api_root(request, format=None):
         'records': reverse('api-record-list', request=request, format=format),
     })
 
-# from class - working as a GET but not POST / changing arg to ListCreateAPIView may work but needs modification
+# from class - working (GET)
 class HabitListView(APIView):
     def get(self, request, format=None):
         """
@@ -27,22 +27,22 @@ class HabitListView(APIView):
         serializer = HabitSerializer(habits, many=True)
         return Response(serializer.data)
 
-# from drf tutorial and likely will change
+# from drf tutorial - working (GET, PATCH, POST)
 class HabitDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
 
-# working
+# working (GET)
 class UserList(generics.ListAPIView):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
 
-# from drf tutorial - not working
+# from drf tutorial - working (GET / singluar - eg. user)
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-# testing - working'ish
+# testing - ?
 class RecordDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Record.objects.all()
     serializer_class = RecordSerializer
@@ -50,10 +50,18 @@ class RecordDetail(generics.RetrieveUpdateDestroyAPIView):
     def perform_destroy(self, instance):
         instance.delete()
 
-# added during drive/class
+# added during drive/class - working
 class HabitCreateView (CreateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+# testing / working but functionality is odd
+class RecordCreateView (CreateAPIView):
+    queryset = Record.objects.all()
+    serializer_class = RecordSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

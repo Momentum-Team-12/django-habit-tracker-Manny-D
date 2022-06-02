@@ -32,6 +32,8 @@ class RecordSerializer(serializers.ModelSerializer):
         fields = (
             'date',
             'record',
+            'pk',
+            'habit',
         )
 
 # testing for later
